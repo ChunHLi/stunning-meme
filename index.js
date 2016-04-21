@@ -44,6 +44,6 @@ var pauseBalls = function(){ };
 //needs code
 var addBall = function(){ balls.push(createBall());};
 
-playButton.addEventListener("click", playBalls)
-pauseButton.addEventListener("click". pauseBalls)
-addButton.addEventListener("click", addBall)
+playButton.addEventListener("click", playBalls);
+pauseButton.addEventListener("click". pauseBalls);
+addButton.addEventListener("click", addBall);
