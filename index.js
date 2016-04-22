@@ -16,23 +16,31 @@ var createBall = function(){
   var xDir = Math.random()*2-1;
   var yDir = Math.random()*2-1;
   var color = 'hsl(' + 360 * Math.random() + ', 50%, 50%)';
-  var xVel = Math.floor(Math.random() * 5)+1;
-  var yVel = Math.floor(Math.random() * 5)+1;
+  var xSpd = Math.floor(Math.random() * 5)+1;
+  var ySpd = Math.floor(Math.random() * 5)+1;
+  var xVel = xSpd * xDir;
+  var yVel = ySpd * yDir;
   var Ball = function(){
     ctx.beginPath();
     ctx.fillStyle = color;
     ctx.arc(xPos, yPos, rad, 0, 2 * Math.PI);
     ctx.fill();
-    xPos = xPos + (xVel * xDir);
-    yPos = yPos + (yVel * yDir);
+    xPos = xPos + xVel;
+    yPos = yPos + yVel;
   }
   var Bounce = function(){
     if (Math.abs(xPos-c.width/2) >= c.width/2 - rad){
 	    xDir = xDir * -1;
 	  }
-	  if (Math.abs(yPos-c.height/2) >= c.height/2 - rad){
+    if (Math.abs(yPos-c.height/2) >= c.height/2 - rad){
 	    yDir = yDir * -1;
     }
+    //for(var i = 0; i<balls.length; i++){
+    //  var d = Math.pow(this.xPos - balls[i].xPos, 2) + Math.pow(this.yPos - balls[i].yPos, 2);
+    //  if (d >= 0.1 && d < Math.pow(this.rad + balls[i].rad, 2)) {
+    //	  	xPos = 
+    //	}
+    //}
     //still needs part of function to bounce off other balls; not
     //edit: not really necessary
   }
