@@ -3,6 +3,8 @@ var ctx = c.getContext("2d");
 var playButton = document.getElementById("play");
 var pauseButton = document.getElementById("pause");
 var addButton = document.getElementById("add");
+var animation;
+var pausestate = false;
 
 var balls = [];
 
@@ -38,12 +40,26 @@ var createBall = function(){
   };
 };
 
-var playBalls = function(){ };
+var playBalls = function(){
+	ctx.clearRect(0,0,c.width,c.height);
+	for(var i = 0; i<balls.length; i++){
+		balls[i].ball();
+		balls[i].bounce();
+	}
+	animation = requestAnimationFrame(playBalls);
+};
 //needs code
-var pauseBalls = function(){ };
+var pauseBalls = function(){
+	if (!pausestate){
+	cancelAnimationFrame(animation);
+	} else {
+	animation = requestAnimationFrame(playBalls);
+	}
+	pausestate = !pausestate;
+};
 //needs code
 var addBall = function(){ balls.push(createBall());};
 
-playButton.addEventListener("click", playBalls);
-pauseButton.addEventListener("click". pauseBalls);
+playButton.addEventListener("click", function(){pausestate = false; playBalls();});
+pauseButton.addEventListener("click", pauseBalls);
 addButton.addEventListener("click", addBall);
