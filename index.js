@@ -27,13 +27,13 @@ var createBall = function(){
     ctx.fill();
     xPos = xPos + xVel;
     yPos = yPos + yVel;
-  }
+  };
   var Bounce = function(){
     if (Math.abs(xPos-c.width/2) >= c.width/2 - rad){
-	    xDir = xDir * -1;
+	    xVel = xVel * -1;
 	  }
     if (Math.abs(yPos-c.height/2) >= c.height/2 - rad){
-	    yDir = yDir * -1;
+	    yVel = yVel * -1;
     }
     //for(var i = 0; i<balls.length; i++){
     //  var d = Math.pow(this.xPos - balls[i].xPos, 2) + Math.pow(this.yPos - balls[i].yPos, 2);
@@ -43,7 +43,7 @@ var createBall = function(){
     //}
     //still needs part of function to bounce off other balls; not
     //edit: not really necessary
-  }
+  };
   return {
     ball : Ball,
     bounce : Bounce  
