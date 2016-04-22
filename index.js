@@ -3,22 +3,24 @@ var ctx = c.getContext("2d");
 var playButton = document.getElementById("play");
 var pauseButton = document.getElementById("pause");
 var addButton = document.getElementById("add");
+var removeButton = document.getElementById("remove");
 var animation;
-var pausestate = false;
+var pausestate = true;
 
 var balls = [];
 
 var createBall = function(){
-  var xPos = Math.floor(Math.random() * c.width);
-  var yPos = Math.floor(Math.random() * c.height);
-  var xDir = 1;
-  var yDir = 1;
-  var xVel = Math.floor(Math.random() * 10);
-  var yVel = Math.floor(Math.random() * 10);
   var rad = Math.floor(Math.random() * 50);
+  var xPos = Math.floor(Math.random() * (c.width-2*rad) + rad);
+  var yPos = Math.floor(Math.random() * (c.height-2*rad) + rad);
+  var xDir = Math.random()*2-1;
+  var yDir = Math.random()*2-1;
+  var color = 'hsl(' + 360 * Math.random() + ', 50%, 50%)';
+  var xVel = Math.floor(Math.random() * 5)+1;
+  var yVel = Math.floor(Math.random() * 5)+1;
   var Ball = function(){
     ctx.beginPath();
-    ctx.fillStyle = 'hsl(' + 360 * Math.random() + ', 50%, 50%)';
+    ctx.fillStyle = color;
     ctx.arc(xPos, yPos, rad, 0, 2 * Math.PI);
     ctx.fill();
     xPos = xPos + (xVel * xDir);
@@ -60,6 +62,9 @@ var pauseBalls = function(){
 //needs code
 var addBall = function(){ balls.push(createBall());};
 
-playButton.addEventListener("click", function(){pausestate = false; playBalls();});
+var removeBall = function() { balls.pop(); };
+
+playButton.addEventListener("click", function(){ if (pausestate) { pausestate = false; playBalls(); } });
 pauseButton.addEventListener("click", pauseBalls);
 addButton.addEventListener("click", addBall);
+removeButton.addEventListener("click", removeBall);
