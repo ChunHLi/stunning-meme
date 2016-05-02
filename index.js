@@ -4,6 +4,8 @@ var playButton = document.getElementById("play");
 var pauseButton = document.getElementById("pause");
 var addButton = document.getElementById("add");
 var removeButton = document.getElementById("remove");
+var gatherButton = document.getElementById("gather");
+var disperseButton = document.getElementById("disperse");
 var animation;
 var pausestate = true;
 
@@ -44,10 +46,22 @@ var createBall = function(){
     //still needs part of function to bounce off other balls; not
     //edit: not really necessary
   };
-  return {
-    ball : Ball,
-    bounce : Bounce  
+  var Gather = function(){
+      xPos = Math.floor(Math.random() * c.width / 3 + c.width/3);
+      yPos = Math.floor(Math.random() * c.height / 3 + c.width/3);
+      xVel = 1 * xSpd;
+      yVel = 1 * ySpd;
   };
+  var Disperse = function(){
+      xPos = c.width/2;
+      yPos = c.height/2;
+  };
+    return {
+	ball : Ball,
+	bounce : Bounce,
+	gather : Gather,
+	disperse : Disperse
+	}
 };
 
 var playBalls = function(){
@@ -72,7 +86,16 @@ var addBall = function(){ balls.push(createBall());};
 
 var removeBall = function() { balls.pop(); };
 
+var gatherBall = function() { for(var i=0; i<balls.length; i++)
+			      { balls[i].gather(); }
+			    };
+var disperseBall = function() { for(var i=0; i<balls.length; i++)
+			      { balls[i].disperse(); }
+			    };
+
 playButton.addEventListener("click", function(){ if (pausestate) { pausestate = false; playBalls(); } });
 pauseButton.addEventListener("click", pauseBalls);
 addButton.addEventListener("click", addBall);
 removeButton.addEventListener("click", removeBall);
+gatherButton.addEventListener("click", gatherBall);
+disperseButton.addEventListener("click", disperseBall);
